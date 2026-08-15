@@ -1,0 +1,7 @@
+bin/
+
+# Vite output. dist/.gitkeep is tracked on purpose: web/embed.go needs a file
+# there for `go build` to succeed on a clone that has never run npm.
+web/dist/*
+!web/dist/.gitkeep
+web/node_modules/

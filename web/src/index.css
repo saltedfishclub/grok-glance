@@ -1,0 +1,54 @@
+/*
+ * HeroUI v3 brings its own `@import "tailwindcss"`, the default theme's CSS
+ * variables and the `dark` custom variant, so importing it is the whole Tailwind
+ * setup — there is no tailwind.config.js in a v4 CSS-first project.
+ */
+@import "@heroui/react/styles";
+
+/*
+ * Tailwind v4 discovers utility classes by scanning from the CSS file that
+ * imports it. That file lives in node_modules here, so automatic detection would
+ * scan the wrong tree and emit a stylesheet with none of this app's utilities.
+ * Pointing @source at src/ is what makes the build correct rather than empty.
+ */
+@source "./";
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family:
+      ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+    /* iOS zooms the page when a focused input is under 16px; the prompt box is
+       the one control a phone user reaches for most. */
+    -webkit-text-size-adjust: 100%;
+  }
+}
+
+@layer components {
+  /*
+   * Transcript text is model output and command output: it must wrap, preserve
+   * its own whitespace, and never widen the page. `overflow-wrap: anywhere` is
+   * what keeps a 200-character path or a base64 blob from introducing a
+   * horizontal scrollbar on the whole layout.
+   */
+  .glance-pre {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 0.8125rem;
+    line-height: 1.55;
+  }
+
+  .glance-prose {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    line-height: 1.65;
+  }
+}
